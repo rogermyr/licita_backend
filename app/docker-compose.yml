@@ -1,0 +1,85 @@
+# docker-compose.yml
+
+version: '3.8'
+
+services:
+  # ----------------------------------------------------
+  # 1. PostgreSQL (Simulação AWS RDS)
+  # ----------------------------------------------------
+  db:
+    image: postgres:16-alpine
+    container_name: postgres_db_local
+    restart: always
+    
+    # Variáveis de Ambiente (Carregadas do .env)
+    environment:
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_DB: ${DB_NAME}
+      
+    # Mapeia a porta 5432 para acesso externo (opcional para ferramentas como DBeaver)
+    ports:
+      - "5432:5432"
+      
+    # Volume para persistência dos dados
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    
+    # HEALTHCHECK: Garante que o DB está pronto e aceitando conexões
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $$POSTGRES_USER -d $$POSTGRES_DB"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    
+    networks:
+      - app-network
+
+  # ----------------------------------------------------
+  # 2. FastAPI Backend (Servidor Web)
+  # ----------------------------------------------------
+  web:
+    # Usa o Dockerfile na raiz
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: fastapi_backend_local
+    restart: "no"
+
+    command: python -m gunicorn --bind 0.0.0.0:8000 -w 1 -k uvicorn.workers.UvicornWorker main:app
+    
+    # O ENTRYPOINT e CMD estão no Dockerfile (usando Gunicorn/Uvicorn e entrypoint.sh)
+    
+    # Mapeia a porta 8000 para acesso local (http://localhost:8000)
+    ports:
+      - "8000:8000"
+      
+    # Variáveis de Ambiente (Carregadas do .env)
+    environment:
+      DATABASE_URL: ${DATABASE_URL}
+      SECRET_KEY: ${SECRET_KEY}
+      ENVIRONMENT: ${ENVIRONMENT}
+      
+    # Dependência: Só inicia depois que o DB estiver saudável
+    depends_on:
+      db:
+        condition: service_healthy 
+        
+    # Mapeamento de volume para desenvolvimento (útil para que o entrypoint.sh 
+    # e migrações possam acessar o código)
+    volumes:
+      - .:/app
+    
+    networks:
+      - app-network
+
+# ----------------------------------------------------
+# 3. Volumes e Redes
+# ----------------------------------------------------
+volumes:
+  postgres_data:
+    # Volume para persistir dados do PostgreSQL localmente
+
+networks:
+  app-network:
+    driver: bridge

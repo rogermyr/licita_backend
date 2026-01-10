@@ -1,0 +1,42 @@
+                                                                   Table "public.licitacoes_itens"
+       Column        |       Type        | Collation | Nullable |                   Default                    | Storage  | Compression | Stats target | Description 
+---------------------+-------------------+-----------+----------+----------------------------------------------+----------+-------------+--------------+-------------
+ id                  | integer           |           | not null | nextval('licitacoes_itens_id_seq'::regclass) | plain    |             |              | 
+ licitacao_id        | integer           |           |          |                                              | plain    |             |              | 
+ numero_item         | integer           |           |          |                                              | plain    |             |              | 
+ descricao           | character varying |           |          |                                              | extended |             |              | 
+ quantidade          | double precision  |           |          |                                              | plain    |             |              | 
+ valor_unitario      | double precision  |           |          |                                              | plain    |             |              | 
+ valor_total         | double precision  |           |          |                                              | plain    |             |              | 
+ unidade_medida      | character varying |           |          |                                              | extended |             |              | 
+ criterio_julgamento | character varying |           |          |                                              | extended |             |              | 
+ conteudo_item_json  | text              |           |          |                                              | extended |             |              | 
+Indexes:
+    "licitacoes_itens_pkey" PRIMARY KEY, btree (id)
+    "idx_itens_busca_otimizada" btree (licitacao_id, valor_unitario, quantidade, (valor_unitario * quantidade) DESC)
+    "idx_itens_order_cover" btree ((valor_unitario * quantidade) DESC, licitacao_id) INCLUDE (descricao, valor_unitario, quantidade)
+    "idx_itens_order_limit" btree ((valor_unitario * quantidade) DESC, licitacao_id)
+Foreign-key constraints:
+    "licitacoes_itens_licitacao_id_fkey" FOREIGN KEY (licitacao_id) REFERENCES licitacoes_raw(id)
+Access method: heap
+
+                                                                       Table "public.licitacoes_raw"
+      Column       |            Type             | Collation | Nullable |                  Default                   | Storage  | Compression | Stats target | Description 
+-------------------+-----------------------------+-----------+----------+--------------------------------------------+----------+-------------+--------------+-------------
+ id                | integer                     |           | not null | nextval('licitacoes_raw_id_seq'::regclass) | plain    |             |              | 
+ pncp_id           | character varying           |           | not null |                                            | extended |             |              | 
+ data_publicacao   | timestamp without time zone |           | not null |                                            | plain    |             |              | 
+ orgao_nome        | character varying           |           |          |                                            | extended |             |              | 
+ objeto            | text                        |           |          |                                            | extended |             |              | 
+ conteudo_json     | jsonb                       |           |          |                                            | extended |             |              | 
+ data_coleta       | timestamp without time zone |           |          |                                            | plain    |             |              | 
+ sistema_origem    | integer                     |           |          |                                            | plain    |             |              | 
+ codigo_modalidade | integer                     |           |          |                                            | plain    |             |              | 
+Indexes:
+    "licitacoes_raw_pkey" PRIMARY KEY, btree (id)
+    "idx_raw_filtros_composto" btree (sistema_origem, codigo_modalidade)
+    "licitacoes_raw_pncp_id_key" UNIQUE CONSTRAINT, btree (pncp_id)
+Referenced by:
+    TABLE "licitacoes_itens" CONSTRAINT "licitacoes_itens_licitacao_id_fkey" FOREIGN KEY (licitacao_id) REFERENCES licitacoes_raw(id)
+Access method: heap
+
