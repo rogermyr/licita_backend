@@ -21,7 +21,7 @@ from schemas.schemas import (
 
 # Importa a lógica de busca
 from crud.search_logic import build_and_execute_search_query 
-from models import Usuario, ClienteConfig 
+from models.user import Usuario, ClienteConfig 
 
 # Importa a função de processamento da camada de serviço
 from services.search_processor import process_search_results 

@@ -17,7 +17,7 @@ from crud.acompanhamento_logic import (
 from services.acompanhamento_processor import process_acompanhamento_list 
 
 # Modelos e Schemas
-from models import Usuario 
+from models.user import Usuario 
 from schemas.schemas import (
     ItemAcompanhadoResponse, 
     AcompanhamentoAction,

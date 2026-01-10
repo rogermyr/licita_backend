@@ -1,5 +1,6 @@
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
+from sqlalchemy.pool import NullPool
 import os
 import logging
 # Obtém o logger para este módulo específico
@@ -15,9 +16,19 @@ SQLALCHEMY_DATABASE_URL = os.getenv(
 # Ou se for SQLite para desenvolvimento:
 # SQLALCHEMY_DATABASE_URL = "sqlite:///./sql_app.db"
 
-# Cria o Engine
+# Detecta se está rodando no Vercel (serverless)
+is_vercel = os.getenv("VERCEL") == "1"
+
+# Cria o Engine com configurações apropriadas para serverless
+# No Vercel/serverless, usamos NullPool para evitar problemas com conexões persistentes
+engine_kwargs = {}
+if is_vercel:
+    engine_kwargs["poolclass"] = NullPool
+    engine_kwargs["pool_pre_ping"] = True  # Verifica conexões antes de usar
+
 engine = create_engine(
-    SQLALCHEMY_DATABASE_URL, 
+    SQLALCHEMY_DATABASE_URL,
+    **engine_kwargs
     # Para SQLite (necessário para threads): connect_args={"check_same_thread": False}
 )
 

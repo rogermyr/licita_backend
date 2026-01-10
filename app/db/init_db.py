@@ -1,29 +1,19 @@
-import os
-import sys
-# Adiciona o diretório raiz do projeto ao path para que imports como 'from app.db...' funcionem
-# Isso resolve o problema de execução de módulo que você teve inicialmente.
-sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+"""
+Script para inicializar o banco de dados.
+Cria todas as tabelas definidas nos modelos.
+"""
+from db.base import Base  
+from db.session import engine 
 
-from app.db.base import Base  
-from app.db.session import engine 
-
-# -------------------------------------------------------------
-# 1. IMPORTAÇÃO DE TODOS OS MODELOS PARA REGISTRAR NO Base.metadata
-# O ATO DE IMPORTAR AS CLASSES É CRUCIAL PARA A DESCOBERTA DE TABELAS
-# -------------------------------------------------------------
-
-# Importa o modelo que gera a tabela 'licitacoes_acompanhamento'
-# Garanta que LicitacaoDBModel herde de app.db.base.Base
-from db.models.licitacao import LicitacaoDBModel 
-
-# Importa todos os modelos definidos no seu arquivo de modelos do usuário
-# Garanta que todos estes modelos herdem de app.db.base.Base
+# Importa todos os modelos para que sejam registrados no Base.metadata
+# O ato de importar as classes é crucial para a descoberta de tabelas
 from models import (
     Usuario, 
     ClienteConfig, 
     OportunidadeMatch, 
     LicitacaoRaw, 
-    LicitacaoItem
+    LicitacaoItem,
+    Acompanhamento,
 )
 
 # -------------------------------------------------------------

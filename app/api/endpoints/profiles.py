@@ -7,7 +7,7 @@ from typing import List
 from db.session import get_db
 from core.security import get_current_user
 from schemas.schemas import PerfilSchema, PerfilResponse
-from models import Usuario, ClienteConfig # Seus modelos SQLAlchemy
+from models.user import Usuario, ClienteConfig
 
 # Cria o roteador do FastAPI
 # Nota: O prefixo "/perfis" já será aplicado em app/main.py,

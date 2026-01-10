@@ -11,7 +11,7 @@ from sqlalchemy.orm import Session
 # Importações internas
 from core.config import SECRET_KEY, ALGORITHM, ACCESS_TOKEN_EXPIRE_MINUTES
 from db.session import get_db
-from models import Usuario 
+from models.user import Usuario 
 
 logger = logging.getLogger(__name__)
 

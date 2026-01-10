@@ -18,7 +18,7 @@ from db.dependencies import get_acompanhamento_use_case
 
 # 1. Obter o Usuário/ID a partir do token (Definido em app/api/dependencies.py ou app/core/security.py)
 from core.security import get_current_user
-from models import Usuario
+from models.user import Usuario
 
 # 3. Definição do Endpoint POST
 

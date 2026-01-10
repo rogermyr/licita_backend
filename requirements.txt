@@ -1,0 +1,13 @@
+fastapi
+uvicorn[standard]
+asyncpg
+sqlalchemy
+psycopg2-binary
+pydantic
+python-jose[cryptography]
+py-bcrypt
+python-decouple
+python-multipart
+google-genai
+alembic
+unidecode
