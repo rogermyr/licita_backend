@@ -32,24 +32,6 @@ from app.core.config import CORS_SETTINGS
 from app.api.endpoints import auth, profiles, search, ia, acompanhamento
 from app.api.endpoints import user as user_router
 
-
-# Tente criar as tabelas com um log para depuração
-try:
-    print("Iniciando verificação de tabelas...")
-    Base.metadata.create_all(bind=engine)
-    print("Tabelas verificadas/criadas com sucesso.")
-except Exception as e:
-    print(f"ERRO AO CRIAR TABELAS: {e}")
-
-# Importa as configurações
-from app.core.config import CORS_SETTINGS
-
-# Importa os roteadores (endpoints)
-from app.api.endpoints import auth, profiles, search, ia, acompanhamento
-from app.api.endpoints import user as user_router # NOVO: Importa o novo roteador de usuário
-
-
-
 API_PREFIX = "/api" 
 
 app = FastAPI(
