@@ -6,10 +6,24 @@ from sqlalchemy import text
 import logging
 from db.session import get_db, engine # Adicione 'engine' aqui
 from db.base import Base              # Importe a Base
-import models                         # IMPORTANTE: Importa todos os modelos para registro
+# Importe explicitamente os modelos para garantir o registro no Metadata
+from models import (
+    Usuario, 
+    ClienteConfig, 
+    LicitacaoRaw, 
+    LicitacaoItem, 
+    Acompanhamento, 
+    OportunidadeMatch
+)
 
-# Adicione esta linha para criar as tabelas se elas não existirem
-Base.metadata.create_all(bind=engine)
+# Tente criar as tabelas com um log para depuração
+try:
+    print("Iniciando verificação de tabelas...")
+    Base.metadata.create_all(bind=engine)
+    print("Tabelas verificadas/criadas com sucesso.")
+except Exception as e:
+    print(f"ERRO AO CRIAR TABELAS: {e}")
+
 
 
 # Importa as configurações
