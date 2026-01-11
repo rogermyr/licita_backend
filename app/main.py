@@ -19,6 +19,7 @@ from sqlalchemy import text
 from app.core.config import CORS_SETTINGS
 from app.api.endpoints import auth, profiles, search, ia, acompanhamento
 from app.api.endpoints import user as user_router
+from app.db.session import get_db
 
 API_PREFIX = "/api" 
 
