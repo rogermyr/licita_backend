@@ -20,12 +20,10 @@ from app.db.base import Base
 from app import models # Registra os modelos no metadata
 
 # 3. Bloco de criação de tabelas (usando print para garantir visibilidade no Vercel)
-try:
-    print("--- LOG: TENTANDO CRIAR TABELAS NO DB ---")
-    Base.metadata.create_all(bind=engine)
-    print("--- LOG: TABELAS VERIFICADAS COM SUCESSO ---")
-except Exception as e:
-    print(f"--- LOG: ERRO CRÍTICO AO CRIAR TABELAS: {e} ---")
+
+print("--- LOG: TENTANDO CRIAR TABELAS NO DB ---")
+Base.metadata.create_all(bind=engine)
+print("--- LOG: TABELAS VERIFICADAS COM SUCESSO ---")
 
 # 4. Importação de configurações e routers
 from app.core.config import CORS_SETTINGS
