@@ -8,10 +8,7 @@ logger = logging.getLogger(__name__)
 
 # 1. Configuração da URL do Banco de Dados
 # O ideal é puxar isso de variáveis de ambiente (app.core.config)
-SQLALCHEMY_DATABASE_URL = os.getenv(
-    "DATABASE_URL", 
-    "postgresql://postgres:131194@localhost:5432/pncp_db"
-)
+SQLALCHEMY_DATABASE_URL = os.getenv("DATABASE_URL")
 # Oudbname" 
 # Ou se for SQLite para desenvolvimento:
 # SQLALCHEMY_DATABASE_URL = "sqlite:///./sql_app.db"

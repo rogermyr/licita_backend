@@ -4,7 +4,13 @@ from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy.orm import Session
 from sqlalchemy import text 
 import logging
-from db.session import get_db
+from db.session import get_db, engine # Adicione 'engine' aqui
+from db.base import Base              # Importe a Base
+import models                         # IMPORTANTE: Importa todos os modelos para registro
+
+# Adicione esta linha para criar as tabelas se elas não existirem
+Base.metadata.create_all(bind=engine)
+
 
 # Importa as configurações
 from core.config import CORS_SETTINGS
