@@ -4,17 +4,10 @@ from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy.orm import Session
 from sqlalchemy import text 
 import logging
-from db.session import get_db, engine # Adicione 'engine' aqui
-from db.base import Base              # Importe a Base
+from app.db.session import get_db, engine # Adicione 'engine' aqui
+from app.db.base import Base              # Importe a Base
 # Importe explicitamente os modelos para garantir o registro no Metadata
-from models import (
-    Usuario, 
-    ClienteConfig, 
-    LicitacaoRaw, 
-    LicitacaoItem, 
-    Acompanhamento, 
-    OportunidadeMatch
-)
+from app import models
 
 # Tente criar as tabelas com um log para depuração
 try:
