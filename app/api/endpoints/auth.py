@@ -8,10 +8,10 @@ import logging # NOVO: Adicionado logging para debug
 from bcrypt import gensalt, hashpw, checkpw 
 
 # Importa as dependências e módulos do CORE/DB
-from db.session import get_db
-from core.security import criar_token, get_current_user
-from schemas.schemas import UserCreate # Schema ATUALIZADO
-from models.user import Usuario # IMPORTAÇÃO CORRIGIDA
+from app.db.session import get_db
+from app.core.security import criar_token, get_current_user
+from app.schemas.schemas import UserCreate # Schema ATUALIZADO
+from app.models.user import Usuario # IMPORTAÇÃO CORRIGIDA
 
 
 logger = logging.getLogger(__name__)
