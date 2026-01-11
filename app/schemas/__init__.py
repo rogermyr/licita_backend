@@ -3,7 +3,7 @@ Módulo de schemas Pydantic.
 Define os modelos de validação e serialização da API.
 """
 # Exporta schemas principais de schemas.py
-from .schemas import (
+from app.schemas.schemas import (
     UserCreate,
     PerfilSchema,
     PerfilResponse,
@@ -17,7 +17,7 @@ from .schemas import (
 )
 
 # Exporta schemas de user.py (UserResponse de user.py tem prioridade)
-from .user import UserResponse, UserUpdate
+from app.schemas.user import UserResponse, UserUpdate
 
 __all__ = [
     'UserCreate',

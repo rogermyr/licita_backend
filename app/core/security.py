@@ -9,9 +9,9 @@ from fastapi.security import OAuth2PasswordBearer
 from sqlalchemy.orm import Session
 
 # Importações internas
-from core.config import SECRET_KEY, ALGORITHM, ACCESS_TOKEN_EXPIRE_MINUTES
-from db.session import get_db
-from models.user import Usuario 
+from app.core.config import SECRET_KEY, ALGORITHM, ACCESS_TOKEN_EXPIRE_MINUTES
+from app.db.session import get_db
+from app.models.user import Usuario 
 
 logger = logging.getLogger(__name__)
 

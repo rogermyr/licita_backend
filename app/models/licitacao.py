@@ -3,7 +3,7 @@
 from sqlalchemy import Column, Integer, String, DateTime, Text, Float, ForeignKey
 from sqlalchemy.orm import relationship
 from sqlalchemy.dialects.postgresql import JSONB
-from .base import Base 
+from app.models.base import Base 
 
 # --- TABELA: DADOS BRUTOS DA LICITAÇÃO (RAW) ---
 class LicitacaoRaw(Base):

@@ -2,7 +2,7 @@
 
 from typing import List, Dict, Any
 import logging
-from schemas.schemas import ItemAcompanhadoResponse
+from app.schemas.schemas import ItemAcompanhadoResponse
 
 logger = logging.getLogger(__name__)
 

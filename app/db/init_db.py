@@ -2,12 +2,12 @@
 Script para inicializar o banco de dados.
 Cria todas as tabelas definidas nos modelos.
 """
-from db.base import Base  
-from db.session import engine 
+from app.db.base import Base  
+from app.db.session import engine 
 
 # Importa todos os modelos para que sejam registrados no Base.metadata
 # O ato de importar as classes é crucial para a descoberta de tabelas
-from models import (
+from app.models import (
     Usuario, 
     ClienteConfig, 
     OportunidadeMatch, 

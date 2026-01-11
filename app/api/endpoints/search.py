@@ -8,11 +8,11 @@ from typing import List, Any, Optional
 import logging
 
 # Importa as dependências e módulos
-from db.session import get_db
-from core.security import get_current_user
+from app.db.session import get_db
+from app.core.security import get_current_user
 
 # Schemas
-from schemas.schemas import (
+from app.schemas.schemas import (
     VarreduraRequest, 
     MatchResponse, 
     VarreduraPaginadaResponse,
@@ -20,11 +20,11 @@ from schemas.schemas import (
 )
 
 # Importa a lógica de busca
-from crud.search_logic import build_and_execute_search_query 
-from models.user import Usuario, ClienteConfig 
+from app.crud.search_logic import build_and_execute_search_query 
+from app.models.user import Usuario, ClienteConfig 
 
 # Importa a função de processamento da camada de serviço
-from services.search_processor import process_search_results 
+from app.services.search_processor import process_search_results 
 
 logger = logging.getLogger(__name__)
 

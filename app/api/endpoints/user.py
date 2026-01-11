@@ -1,10 +1,10 @@
 from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.orm import Session
 from sqlalchemy.exc import SQLAlchemyError # NOVO: Importar para capturar erros de DB
-from db.session import get_db
-from core.security import get_current_user
-from models.user import Usuario # Assumindo que Usuario está definido aqui
-from schemas.user import UserResponse, UserUpdate
+from app.db.session import get_db
+from app.core.security import get_current_user
+from app.models.user import Usuario # Assumindo que Usuario está definido aqui
+from app.schemas.user import UserResponse, UserUpdate
 import logging
 from datetime import datetime
 

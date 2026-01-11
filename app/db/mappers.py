@@ -9,7 +9,7 @@ Mantido para referência futura caso seja necessário.
 # Atualmente, o projeto usa Acompanhamento em models/tracking.py em vez de LicitacaoDBModel
 
 # Importa as classes das outras camadas para definir as assinaturas
-from core.domain.licitacao import Licitacao
+from app.core.domain.licitacao import Licitacao
 
 # NOTA: LicitacaoDBModel não existe mais - removido/refatorado
 # from db.models.licitacao import LicitacaoDBModel

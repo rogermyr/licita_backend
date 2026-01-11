@@ -4,10 +4,10 @@ from sqlalchemy.orm import Session
 from typing import List
 
 # Importa as dependências e módulos
-from db.session import get_db
-from core.security import get_current_user
-from schemas.schemas import PerfilSchema, PerfilResponse
-from models.user import Usuario, ClienteConfig
+from app.db.session import get_db
+from app.core.security import get_current_user
+from app.schemas.schemas import PerfilSchema, PerfilResponse
+from app.models.user import Usuario, ClienteConfig
 
 # Cria o roteador do FastAPI
 # Nota: O prefixo "/perfis" já será aplicado em app/main.py,

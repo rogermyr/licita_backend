@@ -2,7 +2,7 @@ from abc import ABC, abstractmethod
 from typing import List, Optional
 
 # Importamos a Entidade que definimos no Arquivo 1
-from core.domain.licitacao import Licitacao 
+from app.core.domain.licitacao import Licitacao 
 
 class RepositorioLicitacoes(ABC):
     """Interface (Port) definindo o contrato de persistência para o Core."""

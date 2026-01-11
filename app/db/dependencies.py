@@ -5,11 +5,11 @@ from fastapi import Depends
 from sqlalchemy.orm import Session 
 
 # 1. Importar as Classes das Camadas Core e Infraestrutura
-from core.use_cases.adicionar_acompanhamento import CasoDeUsoAdicionarAcompanhamento
-from db.repositories.licitacao_repo import LicitacaoRepositorioSQLAlchemy 
+from app.core.use_cases.adicionar_acompanhamento import CasoDeUsoAdicionarAcompanhamento
+from app.db.repositories.licitacao_repo import LicitacaoRepositorioSQLAlchemy 
 # Assumindo que você tem uma função para obter a sessão do DB
 # VERIFIQUE O CAMINHO CORRETO: pode ser app.db.session.get_db
-from db.session import get_db 
+from app.db.session import get_db 
 
 # Função que será usada no Depends() do FastAPI
 def get_acompanhamento_use_case(db: Session = Depends(get_db)) -> CasoDeUsoAdicionarAcompanhamento:

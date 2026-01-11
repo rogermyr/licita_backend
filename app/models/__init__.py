@@ -2,12 +2,12 @@
 Módulo de modelos SQLAlchemy.
 Centraliza todas as definições de modelos do projeto.
 """
-from .base import Base
+from app.models.base import Base
 
 # Importa todos os modelos para que sejam registrados no ORM
-from .user import Usuario, ClienteConfig
-from .licitacao import LicitacaoRaw, LicitacaoItem
-from .tracking import Acompanhamento, OportunidadeMatch
+from app.models.user import Usuario, ClienteConfig
+from app.models.licitacao import LicitacaoRaw, LicitacaoItem
+from app.models.tracking import Acompanhamento, OportunidadeMatch
 
 # Exporta todas as classes para facilitar imports
 __all__ = [

@@ -2,8 +2,8 @@ from datetime import datetime
 from typing import Optional, List
 
 # Importações corrigidas:
-from core.ports.repositorio_licitacoes import RepositorioLicitacoes 
-from core.domain.licitacao import Licitacao 
+from app.core.ports.repositorio_licitacoes import RepositorioLicitacoes 
+from app.core.domain.licitacao import Licitacao 
 
 class LicitacaoJaAcompanhadaError(Exception):
     pass

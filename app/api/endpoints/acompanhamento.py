@@ -5,20 +5,20 @@ from sqlalchemy.orm import Session
 from typing import List, Optional
 
 # Dependências
-from db.session import get_db
-from core.security import get_current_user 
+from app.db.session import get_db
+from app.core.security import get_current_user 
 
 # CRUD e Serviços
-from crud.acompanhamento_logic import (
+from app.crud.acompanhamento_logic import (
     get_acompanhamentos_by_user, 
     toggle_acompanhamento,
     check_item_is_acompanhado
 )
-from services.acompanhamento_processor import process_acompanhamento_list 
+from app.services.acompanhamento_processor import process_acompanhamento_list 
 
 # Modelos e Schemas
-from models.user import Usuario 
-from schemas.schemas import (
+from app.models.user import Usuario 
+from app.schemas.schemas import (
     ItemAcompanhadoResponse, 
     AcompanhamentoAction,
     MatchResponse 

@@ -8,17 +8,17 @@ router = APIRouter(prefix="/licitacoes", tags=["Acompanhamento de Licitações"]
 
 # 2. Importações de Camadas Inferiores (Core e DB)
 # Ajuste o caminho 'app.schemas.schemas' se o seu arquivo Pydantic estiver em outro local.
-from schemas.schemas import LicitacaoCreate, LicitacaoResponse 
-from core.use_cases.adicionar_acompanhamento import (
+from app.schemas.schemas import LicitacaoCreate, LicitacaoResponse 
+from app.core.use_cases.adicionar_acompanhamento import (
     CasoDeUsoAdicionarAcompanhamento, 
     LicitacaoJaAcompanhadaError
 )
 # Assumindo que você tem uma função de dependência para injetar o Caso de Uso
-from db.dependencies import get_acompanhamento_use_case 
+from app.db.dependencies import get_acompanhamento_use_case 
 
 # 1. Obter o Usuário/ID a partir do token (Definido em app/api/dependencies.py ou app/core/security.py)
-from core.security import get_current_user
-from models.user import Usuario
+from app.core.security import get_current_user
+from app.models.user import Usuario
 
 # 3. Definição do Endpoint POST
 
