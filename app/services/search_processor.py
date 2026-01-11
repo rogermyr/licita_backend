@@ -2,7 +2,7 @@
 from datetime import datetime
 from typing import List, Dict, Any, Tuple, Optional # MODIFICADO: Adicionado Optional
 from sqlalchemy.orm import Session
-from schemas.schemas import MatchResponse 
+from app.schemas.schemas import MatchResponse 
 import unidecode 
 import logging
 
