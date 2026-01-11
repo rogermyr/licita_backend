@@ -1,13 +1,37 @@
 # app/main.py
+import logging
+
+# 1. Configuração de Logging deve ser a PRIMEIRA coisa
+logging.basicConfig(
+    level=logging.INFO, 
+    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
+    force=True # Força a aplicação desta configuração
+)
+logger = logging.getLogger(__name__)
+
+# 2. Imports com o prefixo 'app.'
 from fastapi import FastAPI, Depends, status
 from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy.orm import Session
 from sqlalchemy import text 
-import logging
-from app.db.session import get_db, engine # Adicione 'engine' aqui
-from app.db.base import Base              # Importe a Base
-# Importe explicitamente os modelos para garantir o registro no Metadata
-from app import models
+
+from app.db.session import get_db, engine 
+from app.db.base import Base              
+from app import models # Registra os modelos no metadata
+
+# 3. Bloco de criação de tabelas (usando print para garantir visibilidade no Vercel)
+try:
+    print("--- LOG: TENTANDO CRIAR TABELAS NO DB ---")
+    Base.metadata.create_all(bind=engine)
+    print("--- LOG: TABELAS VERIFICADAS COM SUCESSO ---")
+except Exception as e:
+    print(f"--- LOG: ERRO CRÍTICO AO CRIAR TABELAS: {e} ---")
+
+# 4. Importação de configurações e routers
+from app.core.config import CORS_SETTINGS
+from app.api.endpoints import auth, profiles, search, ia, acompanhamento
+from app.api.endpoints import user as user_router
+
 
 # Tente criar as tabelas com um log para depuração
 try:
@@ -17,8 +41,6 @@ try:
 except Exception as e:
     print(f"ERRO AO CRIAR TABELAS: {e}")
 
-
-
 # Importa as configurações
 from app.core.config import CORS_SETTINGS
 
@@ -26,11 +48,7 @@ from app.core.config import CORS_SETTINGS
 from app.api.endpoints import auth, profiles, search, ia, acompanhamento
 from app.api.endpoints import user as user_router # NOVO: Importa o novo roteador de usuário
 
-# 1. Configuração Básica do Logging
-logging.basicConfig(
-    level=logging.INFO, 
-    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
-)
+
 
 API_PREFIX = "/api" 
 
