@@ -1,17 +1,14 @@
 # api/index.py
-"""
-Handler serverless para o Vercel.
-Este arquivo funciona como ponto de entrada para todas as requisições.
-"""
 import sys
 import os
 
-# Adiciona APENAS a raiz do projeto
+# Adiciona a raiz do projeto ao path para encontrar a pasta 'app'
 project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
 if project_root not in sys.path:
     sys.path.insert(0, project_root)
 
-# Importa o app FastAPI usando o caminho completo
+# Importa o app FastAPI
 from app.main import app
 
-handler = app
+# APAGUE A LINHA: handler = app
+# Deixe apenas o import acima. A Vercel encontrará a variável 'app' sozinha.
