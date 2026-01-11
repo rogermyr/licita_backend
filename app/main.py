@@ -20,11 +20,11 @@ except Exception as e:
 
 
 # Importa as configurações
-from core.config import CORS_SETTINGS
+from app.core.config import CORS_SETTINGS
 
 # Importa os roteadores (endpoints)
-from api.endpoints import auth, profiles, search, ia, acompanhamento
-from api.endpoints import user as user_router # NOVO: Importa o novo roteador de usuário
+from app.api.endpoints import auth, profiles, search, ia, acompanhamento
+from app.api.endpoints import user as user_router # NOVO: Importa o novo roteador de usuário
 
 # 1. Configuração Básica do Logging
 logging.basicConfig(
