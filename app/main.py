@@ -13,17 +13,7 @@ logger = logging.getLogger(__name__)
 from fastapi import FastAPI, Depends, status
 from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy.orm import Session
-from sqlalchemy import text 
-
-from app.db.session import get_db, engine 
-from app.db.base import Base              
-from app import models # Registra os modelos no metadata
-
-# 3. Bloco de criação de tabelas (usando print para garantir visibilidade no Vercel)
-
-logger.error("--- LOG: TENTANDO CRIAR TABELAS NO DB ---")
-Base.metadata.create_all(bind=engine)
-logger.error("--- LOG: TABELAS VERIFICADAS COM SUCESSO ---")
+from sqlalchemy import text       
 
 # 4. Importação de configurações e routers
 from app.core.config import CORS_SETTINGS
