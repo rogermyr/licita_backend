@@ -38,7 +38,7 @@ def registrar(user: UserCreate, db: Session = Depends(get_db)):
     try:
         # 3. Cria e salva o novo usuário, populando todos os campos // MODIFICADO CRÍTICO
         novo = Usuario(
-            username=user.email,  # Usamos o email como identificador (username)
+            username=user.username,  # Usamos o email como identificador (username)
             senha_hash=hash_senha,
             nome_completo=user.nome_completo,  # NOVO
             telefone=user.telefone,            # NOVO
